@@ -1,0 +1,64 @@
+<head>
+    <title>Protein Tracker</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+</body>
+
+<template name="home">
+    <div class="container">
+        {{> title}}
+        {{> loginButtons}}
+        {{#if currentUser}}
+            <br><a href="/settings">Settings</a> 
+            {{> userData}}
+            {{> proteinHistory}}
+        {{/if}}
+    </div>
+</template>
+
+<template name="userData">
+    {{#with userData}}
+    <h2>Total: {{total}}</h2>
+    <h2>Goal: {{goal}}</h2>
+    {{/with}}
+    <input id="amount" type="text" value="{{lastAmount}}" />
+    <input id="addAmount" type="submit" value="Add Protein" class="btn btn-primary"/>
+    <input id="undoLast" type="submit" value="Undo Last" class="btn btn-primary"/>
+</template>
+
+<template name="proteinHistory">
+    <h2>Last 5 Entries:</h2>
+    {{#if historyCount}}
+        {{#each history}}
+            <p>{{date}} -> {{value}}</p>
+        {{/each}}
+    {{else}}
+        <p>You don't have any entries yet. :D</p>
+    {{/if}}
+</template>
+
+<template name="settings">
+    <div class="container">
+        {{> title}}
+        {{> loginButtons}}
+        <br>
+        <a href="/">Back</a>
+        <h2>Settings:</h2>
+        <input id="newGoal" type="text" value="{{userData.goal}}"/>
+        <input id="setGoal" type="submit" value="Set Goal" class="btn btn-primary"/>
+        <br>
+        <div id="clearTotal" class="btn btn-primary">Clear Protein History</div>
+        <br>
+    </div>
+</template>
+
+<template name="title">
+    <h1>Protein Tracker!</h1>
+</template>
