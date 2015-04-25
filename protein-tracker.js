@@ -84,7 +84,7 @@ if (Meteor.isClient) {
     Template.userData.events({
         "click #addAmount, keypress #amount": function (e) {
                         
-            if(e.charCode != 13) {
+            if(e.charCode && e.charCode != 13) {
               return;
             }
 
