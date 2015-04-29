@@ -59,6 +59,13 @@ if (Meteor.isClient) {
         this.render("settings");
     });
 
+    // Route to 'home' if user logged out
+    Meteor.autorun(function() {
+        if(!Meteor.userId()) {
+            Router.go("/");
+        }
+    });
+
     Template.userData.helpers({
         userData: function () {
             var data = UserData.findOne();
